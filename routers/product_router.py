@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
-from schemas.product_schema import ProductCreate, SellRequest
+from schemas.product_schema import ProductCreate, SellRequest, BulkPriceUpdateRequest
 from services.product_service import product_service
 
 # สร้าง Router และกำหนด Prefix
@@ -30,3 +30,7 @@ def sell_product(request: SellRequest):
 @router.get("/search")
 def search_products(keyword: str):
     return product_service.search_products(keyword)
+
+@router.put("/bulk-price-update")
+def bulk_update_price(request: BulkPriceUpdateRequest):
+    return product_service.bulk_update_price(request)
